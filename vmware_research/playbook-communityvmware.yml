@@ -1,0 +1,23 @@
+---
+- name: Example of using community vmware module
+  gather_facts: no
+  hosts: vmware_inventory            # best practice (i.e. always works, very clear... ALWAYS make an inventory)
+  #connection: ansible.builtin.local  # this can be placed in the inventory -- okay to have here as it promotes clarity / intention
+
+  # you can use the playbook in the following manner
+  # without exposing any variables
+  # 
+  # the following will ALWAYS have highest priority
+  # ansible-playbook playbook-communityvmware.yml -e vcenter_hostname=dcalpha -e vcenter_username=admin -e vcenter_password=qwerty
+  
+  tasks:
+    - name: Gather information about all datacenters
+      community.vmware.vmware_datacenter_info:
+        hostname: '{{ vcenter_hostname }}'
+        username: '{{ vcenter_username }}'
+        password: '{{ vcenter_password }}'
+      register: results
+
+    - name: Display what we just harvested
+      ansible.builtin.debug:
+        var: results

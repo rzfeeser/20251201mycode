@@ -1,0 +1,2 @@
+[vmware_inventory]
+dc_alpha ansible_connection=ansible.builtin.local ansible_host=localhost vcenter_hostname=192.168.70.33 vcenter_password=qwerty vcenter_username=admin
